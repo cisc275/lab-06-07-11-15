@@ -13,7 +13,7 @@ package Files;
 
 public class Model {
 	
-//added this into button branch
+//added this into button branch -- amjed
 	int x;
 	int y;
 	int dir = 3;
