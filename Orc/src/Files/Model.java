@@ -15,10 +15,10 @@ public class Model {
 	
 	int x;
 	int y;
-	int dir = 3;
 	int xChg = 1;
 	int yChg = 1;
-	static int picNum = 0;
+	static int motionPicNum = 0;
+	static int actionPicNum = 0;
 	final int xIncr = 8;
 	final int yIncr = 2;
 	int orcWidth = 165;
@@ -43,7 +43,7 @@ public class Model {
 	}
 	
 	public void updateLocationAndDirection() {
-		//picNum = (picNum + 1) % View.getFrameCount();
+		motionPicNum = (motionPicNum + 1) % View.getFrameCount();
         if(x > (frameWidth - View.getImageWidth()) || x < 0) {
         	switch(direction) {
 	        	case NORTHEAST:
@@ -58,6 +58,8 @@ public class Model {
 	        	case NORTHWEST:
 	        		direction = Direction.NORTHEAST;
 	        		break;
+			default:
+				break;
         	}
         	xChg = -1*xChg;
         	
@@ -78,6 +80,8 @@ public class Model {
         		case NORTHWEST:
         			direction = Direction.SOUTHWEST;;
         			break;
+			default:
+				break;
         	}
         }
         x += xChg*xIncr;
@@ -90,7 +94,7 @@ public class Model {
 	
 	public Direction getDirect() { return direction; }
 	
-	public static int getPicNum() { return picNum; }
+	public static int getPicNum() { return motionPicNum; }
 
 
 	

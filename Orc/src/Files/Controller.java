@@ -2,10 +2,9 @@ package Files;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-/**
- * Do not modify this file without permission from your TA.
- **/
 
 public class Controller {
 
@@ -45,5 +44,19 @@ public class Controller {
 class ButtonListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Controller.running = !Controller.running;
+	}
+}
+
+class KeyPress implements KeyListener {
+
+	public void keyTyped(KeyEvent e) {
+	}
+	public void keyPressed(KeyEvent e) {
+	}
+	public void keyReleased(KeyEvent e) {
+		if (e.getKeyChar() == 'j')
+			System.out.println("jump");
+		if (e.getKeyChar() == 'f')
+			System.out.println("Fire");
 	}
 }

@@ -82,6 +82,8 @@ public class View extends JPanel {
         
         btn.addActionListener(new ButtonListener());
         
+        this.addKeyListener(new KeyPress());
+        this.setFocusable(true);
         frame.setVisible(true);
 	}
 	
