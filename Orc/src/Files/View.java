@@ -1,4 +1,5 @@
 package Files;
+import java.awt.BorderLayout;
 /**
  * View: Contains everything about graphics and images
  * Know size of world, which images to load etc
@@ -31,8 +32,8 @@ public class View extends JPanel {
 	Direction dir;
 	
 	JButton btn = new JButton("Start/Stop");
-	private static final int btn_x = 300; // location x 
-	private static final int btn_y = 50;  // location y 
+	private static final int btn_x = 10; // location x 
+	private static final int btn_y = 10;  // location y 
 	private static final int btn_width = 140;
 	private static final int btn_height = 50; 
 	
@@ -40,8 +41,7 @@ public class View extends JPanel {
 	
 	BufferedImage[][] pics;
 	
-	public View() { //ENUM FILE
-		//TODO switch to enumerated type
+	public View() { 
 		String[] arrOfStr = {"forward_north", "forward_northeast", "forward_east", "forward_southeast",
                 "forward_south", "forward_southwest", "forward_west", "forward_northwest"};
         BufferedImage[] img = createImage(arrOfStr);
@@ -53,17 +53,17 @@ public class View extends JPanel {
             }
             count ++;
         }
-		
+        
 		JFrame frame = new JFrame();
         frame.getContentPane().add(this);
-       // frame.getContentPane().setBackground(Color.RED);
         this.setBackground(Color.GRAY);
-        //TODO : this doesn't work.
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(frameWidth, frameHeight);
+        btn.setBounds(btn_x, btn_y, btn_width, btn_height);
+        
+        frame.getContentPane().add(btn,BorderLayout.SOUTH);
+
         frame.setVisible(true);
-        //btn.setBounds(btn_x, btn_y, btn_width, btn_height);
-        //frame.getContentPane().add(btn);
 	}
 	
     private BufferedImage[] createImage(String[] strArr){

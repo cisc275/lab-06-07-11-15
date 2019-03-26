@@ -13,7 +13,6 @@ package Files;
 
 public class Model {
 	
-//added this into button branch -- amjed
 	int x;
 	int y;
 	int dir = 3;
@@ -44,7 +43,6 @@ public class Model {
 	}
 	
 	public void updateLocationAndDirection() {
-		//TODO switch to enumerated type ***BRANCH FIRST****
 		picNum = (picNum + 1) % View.getFrameCount();
         if(x > (frameWidth - View.getImageWidth()) || x < 0) {
         	switch(direction) {
