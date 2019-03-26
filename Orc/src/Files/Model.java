@@ -82,10 +82,6 @@ public class Model {
         }
         x += xChg*xIncr;
         y += yChg*yIncr;
-        //System.out.println(direction.getHierarchy());
-        //System.out.println(x);
-        //System.out.println(y);
-        //System.out.println("Dir " + dir);
 	}
 	
 	public int getX() { return x; }

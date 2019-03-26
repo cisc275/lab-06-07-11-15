@@ -11,6 +11,7 @@ public class Controller {
 
 	private Model model;
 	private View view;
+	public static Boolean running = true;
 	
 	public Controller(){
 		view = new View();
@@ -21,10 +22,20 @@ public class Controller {
 	public void start(){
 		for(int i = 0; i < 5000; i++)
 		{
-			//increment the x and y coordinates, alter direction if necessary
-			model.updateLocationAndDirection();
-			//update the view
-			view.update(model.getX(), model.getY(), model.getDirect());
+			if(running) {
+				//increment the x and y coordinates, alter direction if necessary
+				model.updateLocationAndDirection();
+				//update the view
+				view.update(model.getX(), model.getY(), model.getDirect());
+			} else {
+				while(!running) {
+					try {
+			            Thread.sleep(1);
+			        } catch (InterruptedException e) {
+			            e.printStackTrace();
+			        }
+				}
+			}
 		}
 		
 		
@@ -33,6 +44,6 @@ public class Controller {
 
 class ButtonListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("HI");
+		Controller.running = !Controller.running;
 	}
 }
