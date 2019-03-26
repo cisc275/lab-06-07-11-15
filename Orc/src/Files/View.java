@@ -82,7 +82,6 @@ public class View extends JPanel {
         
         btn.addActionListener(new ButtonListener());
         
-
         frame.setVisible(true);
 	}
 	
@@ -128,4 +127,6 @@ public class View extends JPanel {
 	public static int getImageHeight() { return orcHeight; }
 	
 	public static int getFrameCount() { return frameCount; }
+	
+	public static int getSmlFrameCount() { return smlFrameCount; }
 }

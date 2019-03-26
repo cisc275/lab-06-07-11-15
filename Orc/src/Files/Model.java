@@ -43,7 +43,7 @@ public class Model {
 	}
 	
 	public void updateLocationAndDirection() {
-		picNum = (picNum + 1) % View.getFrameCount();
+		//picNum = (picNum + 1) % View.getFrameCount();
         if(x > (frameWidth - View.getImageWidth()) || x < 0) {
         	switch(direction) {
 	        	case NORTHEAST:
