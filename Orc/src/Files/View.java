@@ -33,26 +33,42 @@ public class View extends JPanel {
 	Direction dir;
 	
 	JButton btn = new JButton("Start/Stop");
+	
+	/*
 	private static final int btn_x = 10; // location x 
 	private static final int btn_y = 10;  // location y 
 	private static final int btn_width = 140;
 	private static final int btn_height = 50; 
+	*/
 	
 	final static int frameCount = 10;
+	final static int smlFrameCount = 4;
+	final static int numImages = 24;
 	
 	BufferedImage[][] pics;
 	
 	public View() { 
-		String[] arrOfStr = {"forward_north", "forward_northeast", "forward_east", "forward_southeast",
+		String[] arrOf10FrameStr = {"forward_north", "forward_northeast", "forward_east", "forward_southeast",
                 "forward_south", "forward_southwest", "forward_west", "forward_northwest"};
-        BufferedImage[] img = createImage(arrOfStr);
-        pics = new BufferedImage[frameCount][arrOfStr.length];
+		String[] arrOf4FrameStr = {"fire_north",
+                "fire_south", "fire_east", "fire_west", "fire_northeast", "fire_northwest", "fire_southeast",
+                "fire_southwest", "jump_north", "jump_south", "jump_east", "jump_west", "jump_northeast",
+                "jump_northwest", "jump_southeast", "jump_southwest"};
+        BufferedImage[] img10 = createImage(arrOf10FrameStr);
+        BufferedImage[] img4 = createImage(arrOf4FrameStr);
+        pics = new BufferedImage[frameCount][numImages];
         int count = 0;
-        for (BufferedImage curImg : img) {
+        for (BufferedImage curImg : img10) {
             for(int i = 0; i < frameCount; i++) {
                 pics[i][count] = curImg.getSubimage(orcWidth*i, 0, orcWidth, orcHeight);
             }
             count ++;
+        }
+        for (BufferedImage curImg : img4) {
+	        	for(int i = 0; i < smlFrameCount; i++) {
+	            pics[i][count] = curImg.getSubimage(orcWidth*i, 0, orcWidth, orcHeight);
+	        }
+	        count ++;
         }
         
 		JFrame frame = new JFrame();
