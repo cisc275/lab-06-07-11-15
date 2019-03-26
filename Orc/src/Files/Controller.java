@@ -55,8 +55,8 @@ class KeyPress implements KeyListener {
 	}
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyChar() == 'j')
-			System.out.println("jump");
+			Model.setAction("jump");
 		if (e.getKeyChar() == 'f')
-			System.out.println("Fire");
+			Model.setAction("fire");
 	}
 }

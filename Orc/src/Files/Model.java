@@ -25,6 +25,7 @@ public class Model {
 	int orcHeight = 165;
 	int frameWidth = 500;
 	int frameHeight = 300;
+	static String action = "run";
 	Direction direction = Direction.SOUTHEAST;
     
 
@@ -95,6 +96,10 @@ public class Model {
 	public Direction getDirect() { return direction; }
 	
 	public static int getPicNum() { return motionPicNum; }
+	public static int getSmlPicNum() { return actionPicNum; }
+	
+	public static void setAction(String a) { action = a; }
+	public static String getAction() { return action; }
 
 
 	

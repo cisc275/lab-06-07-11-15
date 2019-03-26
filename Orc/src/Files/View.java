@@ -117,7 +117,18 @@ public class View extends JPanel {
 	}
 	
 	public void paint(Graphics g) {
-		g.drawImage(pics[Model.getPicNum()][dir.getHierarchy()], x, y, Color.GRAY, this);
+		switch(Model.getAction()) {
+			case("run"):
+				g.drawImage(pics[Model.getPicNum()][dir.getHierarchy()], x, y, Color.GRAY, this);
+				break;
+			case("jump"):
+				g.drawImage(pics[Model.getSmlPicNum()][dir.getHierarchy()], x, y, Color.GRAY, this);
+				break;
+			case("fire"):
+				g.drawImage(pics[Model.getSmlPicNum()][dir.getHierarchy()], x, y, Color.GRAY, this);
+				break;
+		}
+			
 	}
 	
 	public int getWidth() { return frameWidth; }
