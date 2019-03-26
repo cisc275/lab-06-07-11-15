@@ -42,7 +42,9 @@ public class View extends JPanel {
 	*/
 	
 	final static int frameCount = 10;
-	final static int smlFrameCount = 4;
+	final static int fireFrameCount = 4;
+	final static int jumpFrameCount = 8;
+	//final static int smlFrameCount = 4;
 	final static int numImages = 24;
 	
 	BufferedImage[][] pics;
@@ -52,10 +54,12 @@ public class View extends JPanel {
                 "forward_south", "forward_southwest", "forward_west", "forward_northwest"};
 		String[] arrOf4FrameStr = {"fire_north",
                 "fire_south", "fire_east", "fire_west", "fire_northeast", "fire_northwest", "fire_southeast",
-                "fire_southwest", "jump_north", "jump_south", "jump_east", "jump_west", "jump_northeast",
+                "fire_southwest"};
+		String[] arrOf6FrameStr = {"jump_north", "jump_south", "jump_east", "jump_west", "jump_northeast",
                 "jump_northwest", "jump_southeast", "jump_southwest"};
         BufferedImage[] img10 = createImage(arrOf10FrameStr);
         BufferedImage[] img4 = createImage(arrOf4FrameStr);
+        BufferedImage[] img6 = createImage(arrOf6FrameStr);
         pics = new BufferedImage[frameCount][numImages];
         int count = 0;
         for (BufferedImage curImg : img10) {
@@ -65,11 +69,17 @@ public class View extends JPanel {
             count ++;
         }
         for (BufferedImage curImg : img4) {
-	        	for(int i = 0; i < smlFrameCount; i++) {
+	        	for(int i = 0; i < fireFrameCount; i++) {
 	            pics[i][count] = curImg.getSubimage(orcWidth*i, 0, orcWidth, orcHeight);
 	        }
 	        count ++;
         }
+        for (BufferedImage curImg : img6) {
+        	for(int i = 0; i < jumpFrameCount; i++) {
+            pics[i][count] = curImg.getSubimage(orcWidth*i, 0, orcWidth, orcHeight);
+        }
+        count ++;
+    }
         
 		JFrame frame = new JFrame();
         frame.getContentPane().add(this);
@@ -117,6 +127,7 @@ public class View extends JPanel {
 	}
 	
 	public void paint(Graphics g) {
+
 		switch(Model.getAction()) {
 			case("run"):
 				g.drawImage(pics[Model.getPicNum()][dir.getHierarchy()], x, y, Color.GRAY, this);
@@ -140,6 +151,6 @@ public class View extends JPanel {
 	public static int getImageHeight() { return orcHeight; }
 	
 	public static int getFrameCount() { return frameCount; }
-	
-	public static int getSmlFrameCount() { return smlFrameCount; }
+	public static int getFireFrameCount() { return fireFrameCount; }
+	public static int getJumpFrameCount() { return jumpFrameCount; }
 }

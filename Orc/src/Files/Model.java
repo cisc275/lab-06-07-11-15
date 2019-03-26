@@ -44,49 +44,138 @@ public class Model {
 	}
 	
 	public void updateLocationAndDirection() {
-		motionPicNum = (motionPicNum + 1) % View.getFrameCount();
-        if(x > (frameWidth - View.getImageWidth()) || x < 0) {
-        	switch(direction) {
-	        	case NORTHEAST:
-	        		direction = Direction.NORTHWEST;
-	        		break;
-	        	case SOUTHEAST:
-	        		direction = Direction.SOUTHWEST;
-	        		break;
-	        	case SOUTHWEST:
-	        		direction = Direction.SOUTHEAST;
-	        		break;
-	        	case NORTHWEST:
-	        		direction = Direction.NORTHEAST;
-	        		break;
-			default:
-				break;
-        	}
-        	xChg = -1*xChg;
+		if(action == "run") {
+			motionPicNum = (motionPicNum + 1) % View.getFrameCount();
+	        if(x > (frameWidth - View.getImageWidth()) || x < 0) {
+	        	switch(direction) {
+		        	case NORTHEAST:
+		        		direction = Direction.NORTHWEST;
+		        		break;
+		        	case SOUTHEAST:
+		        		direction = Direction.SOUTHWEST;
+		        		break;
+		        	case SOUTHWEST:
+		        		direction = Direction.SOUTHEAST;
+		        		break;
+		        	case NORTHWEST:
+		        		direction = Direction.NORTHEAST;
+		        		break;
+		        	default:
+		        		break;
+	        	}
+	        	xChg = -1*xChg;
+	        	
+	        }
+	        if(y > (frameHeight - View.getImageHeight()) || y < 0) {
+	
+	        	yChg = -1*yChg;
+	        	switch(direction) {
+	        		case NORTHEAST:
+	        			direction = Direction.SOUTHEAST;
+	        			break;
+	        		case SOUTHEAST:
+	        			direction = Direction.NORTHEAST;
+	        			break;
+	        		case SOUTHWEST:
+	        			direction = Direction.NORTHWEST;
+	        			break;
+	        		case NORTHWEST:
+	        			direction = Direction.SOUTHWEST;
+	        			break;
+	        		default:
+	        			break;
+	        	}
+	        	
+	        }
+	        x += xChg*xIncr;
+        	y += yChg*yIncr;
+		}
+        
+        if(action == "fire") {
+        	actionPicNum = (actionPicNum + 1) % View.getFireFrameCount();
         	
-        }
-        if(y > (frameHeight - View.getImageHeight()) || y < 0) {
-
-        	yChg = -1*yChg;
         	switch(direction) {
-        		case NORTHEAST:
-        			direction = Direction.SOUTHEAST;
-        			break;
-        		case SOUTHEAST:
+    		case NORTHEAST:
+    			direction = Direction.FIRE_NORTHEAST;
+    			break;
+    		case SOUTHEAST:
+    			direction = Direction.FIRE_SOUTHEAST;
+    			break;
+    		case SOUTHWEST:
+    			direction = Direction.FIRE_SOUTHWEST;
+    			break;
+    		case NORTHWEST:
+    			direction = Direction.FIRE_NORTHWEST;
+    			break;
+    		default:
+    			break;
+        	}
+        	
+        	if(actionPicNum == (View.getFireFrameCount()-1)) {
+        		action = "run";
+        		motionPicNum = 0;
+        		actionPicNum = 0;
+        		switch(direction) {
+        		case FIRE_NORTHEAST:
         			direction = Direction.NORTHEAST;
         			break;
-        		case SOUTHWEST:
+        		case FIRE_SOUTHEAST:
+        			direction = Direction.SOUTHEAST;
+        			break;
+        		case FIRE_SOUTHWEST:
+        			direction = Direction.SOUTHWEST;
+        			break;
+        		case FIRE_NORTHWEST:
         			direction = Direction.NORTHWEST;
         			break;
-        		case NORTHWEST:
-        			direction = Direction.SOUTHWEST;;
+        		default:
         			break;
-			default:
-				break;
+            	}
         	}
         }
-        x += xChg*xIncr;
-        y += yChg*yIncr;
+        
+        else if(action == "jump") {
+        	actionPicNum = (actionPicNum + 1) % View.getFrameCount();
+        	
+        	switch(direction) {
+    		case NORTHEAST:
+    			direction = Direction.JUMP_NORTHEAST;
+    			break;
+    		case SOUTHEAST:
+    			direction = Direction.JUMP_SOUTHEAST;
+    			break;
+    		case SOUTHWEST:
+    			direction = Direction.JUMP_SOUTHWEST;
+    			break;
+    		case NORTHWEST:
+    			direction = Direction.JUMP_NORTHWEST;
+    			break;
+    		default:
+    			break;
+        	}
+        	
+        	if(actionPicNum == (View.getJumpFrameCount()-1)) {
+        		action = "run";
+        		motionPicNum = 0;
+        		actionPicNum = 0;
+        		switch(direction) {
+        		case JUMP_NORTHEAST:
+        			direction = Direction.NORTHEAST;
+        			break;
+        		case JUMP_SOUTHEAST:
+        			direction = Direction.SOUTHEAST;
+        			break;
+        		case JUMP_SOUTHWEST:
+        			direction = Direction.SOUTHWEST;
+        			break;
+        		case JUMP_NORTHWEST:
+        			direction = Direction.NORTHWEST;
+        			break;
+        		default:
+        			break;
+            	}
+        	}
+        }
 	}
 	
 	public int getX() { return x; }
