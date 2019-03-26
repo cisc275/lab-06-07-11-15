@@ -1,7 +1,12 @@
 package Files;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  * Do not modify this file without permission from your TA.
  **/
+
 public class Controller {
 
 	private Model model;
@@ -21,5 +26,13 @@ public class Controller {
 			//update the view
 			view.update(model.getX(), model.getY(), model.getDirect());
 		}
+		
+		
+	}
+}
+
+class ButtonListener implements ActionListener {
+	public void actionPerformed(ActionEvent e) {
+		System.out.println("HI");
 	}
 }

@@ -11,6 +11,7 @@ import java.awt.BorderLayout;
  **/
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -59,9 +60,12 @@ public class View extends JPanel {
         this.setBackground(Color.GRAY);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(frameWidth, frameHeight);
-        btn.setBounds(btn_x, btn_y, btn_width, btn_height);
+       // btn.setBounds(btn_x, btn_y, btn_width, btn_height);
         
         frame.getContentPane().add(btn,BorderLayout.SOUTH);
+        
+        btn.addActionListener(new ButtonListener());
+        
 
         frame.setVisible(true);
 	}
