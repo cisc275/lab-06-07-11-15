@@ -11,7 +11,6 @@ import java.awt.BorderLayout;
  **/
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +26,8 @@ public class View extends JPanel {
 	static int frameHeight = 300;
 	static int orcWidth = 165;
 	static int orcHeight = 165;
+	
+    int count = 0;
 	
 	int x;
 	int y;
@@ -44,57 +45,56 @@ public class View extends JPanel {
 	final static int frameCount = 10;
 	final static int fireFrameCount = 4;
 	final static int jumpFrameCount = 8;
-	//final static int smlFrameCount = 4;
 	final static int numImages = 24;
 	
 	BufferedImage[][] pics;
 	
-	public View() { 
+	public void loadImages() {
 		String[] arrOf10FrameStr = {"forward_north", "forward_northeast", "forward_east", "forward_southeast",
                 "forward_south", "forward_southwest", "forward_west", "forward_northwest"};
 		String[] arrOf4FrameStr = {"fire_north",
                 "fire_south", "fire_east", "fire_west", "fire_northeast", "fire_northwest", "fire_southeast",
                 "fire_southwest"};
-		String[] arrOf6FrameStr = {"jump_north", "jump_south", "jump_east", "jump_west", "jump_northeast",
+		String[] arrOf8FrameStr = {"jump_north", "jump_south", "jump_east", "jump_west", "jump_northeast",
                 "jump_northwest", "jump_southeast", "jump_southwest"};
         BufferedImage[] img10 = createImage(arrOf10FrameStr);
         BufferedImage[] img4 = createImage(arrOf4FrameStr);
-        BufferedImage[] img6 = createImage(arrOf6FrameStr);
+        BufferedImage[] img8 = createImage(arrOf8FrameStr);
         pics = new BufferedImage[frameCount][numImages];
-        int count = 0;
-        for (BufferedImage curImg : img10) {
-            for(int i = 0; i < frameCount; i++) {
+
+        addImagesToArray(img10, frameCount);
+        addImagesToArray(img4, fireFrameCount);
+        addImagesToArray(img8, jumpFrameCount);
+	}
+	
+	public void addImagesToArray(BufferedImage[] img, int frameCount) {
+		for(BufferedImage curImg : img) {
+			for(int i = 0; i < frameCount; i++) {
                 pics[i][count] = curImg.getSubimage(orcWidth*i, 0, orcWidth, orcHeight);
             }
             count ++;
-        }
-        for (BufferedImage curImg : img4) {
-	        	for(int i = 0; i < fireFrameCount; i++) {
-	            pics[i][count] = curImg.getSubimage(orcWidth*i, 0, orcWidth, orcHeight);
-	        }
-	        count ++;
-        }
-        for (BufferedImage curImg : img6) {
-        	for(int i = 0; i < jumpFrameCount; i++) {
-            pics[i][count] = curImg.getSubimage(orcWidth*i, 0, orcWidth, orcHeight);
-        }
-        count ++;
-    }
-        
+		}
+	}
+	
+	public void buildFrame() {
 		JFrame frame = new JFrame();
         frame.getContentPane().add(this);
         this.setBackground(Color.GRAY);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(frameWidth, frameHeight);
        // btn.setBounds(btn_x, btn_y, btn_width, btn_height);
-        
         frame.getContentPane().add(btn,BorderLayout.SOUTH);
-        
         btn.addActionListener(new ButtonListener());
         btn.setFocusable(false);
         this.addKeyListener(new KeyPress());
         this.setFocusable(true);
         frame.setVisible(true);
+	}
+	public View() { 
+
+		loadImages();
+		buildFrame();
+		
 	}
 	
     private BufferedImage[] createImage(String[] strArr){
